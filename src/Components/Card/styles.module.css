@@ -1,0 +1,57 @@
+.card {
+    width: 100%;
+    max-width: 250px;
+    min-height: 230px;
+    box-shadow: 2px 3px 5px var(--color-primary);
+    height: max-content;
+    border-radius: 5px;
+    padding-bottom: 1rem;
+    transition: transform .2s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.card * {
+    pointer-events: none;
+}
+
+.card:hover {
+    transform: translateY(-1rem);
+}
+
+.cardImageContainer {
+    width: 100%;;
+    height: 200px;
+}
+
+.cardImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 5px 5px 0 0;
+}
+
+.cardText {
+    font-size: 1.5rem;;
+    text-align: center;
+    font-weight: 500;;
+}
+
+.cardIconButton {
+    display: flex;
+    position: absolute;
+    top: 0;
+    right: 0;
+    pointer-events: initial;
+    max-width: initial;
+    width: auto;
+    height: auto;
+    padding: .5rem;
+    border-radius: 50%;
+    background-color: var(--color-secondary);
+}
+
+.cardIconButton svg {
+    color: var(--color-ternary);
+}
