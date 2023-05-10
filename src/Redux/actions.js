@@ -2,6 +2,7 @@ import { ACTION_TYPES } from "../Common/types"
 
 const {
     GET_CHARACTER,
+    SET_CHARACTERS_NEXT_PAGE,
     SET_QUERY,
     LOADER_OFF,
     LOADER_ON,
@@ -10,12 +11,19 @@ const {
     SET_ERROR_DETAIL,
     SET_DETAIL_ID,
     GET_CHARACTER_DETAIL,
-    ADD_TO_WISH_LIST
+    ADD_TO_WISH_LIST,
 } = ACTION_TYPES;
 
 const getCharacter = (payload) => {
     return {
         type: GET_CHARACTER,
+        payload
+    }
+}
+
+const setCharactersNextpage = (payload) => {
+    return {
+        type: SET_CHARACTERS_NEXT_PAGE,
         payload
     }
 }
@@ -84,5 +92,6 @@ export {
     getCharacterDetail,
     setErrorDetail,
     setDetailId,
-    addToWishList
+    addToWishList,
+    setCharactersNextpage
 }

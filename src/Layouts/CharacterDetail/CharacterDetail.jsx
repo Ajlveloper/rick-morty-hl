@@ -21,7 +21,6 @@ const CharacterDetail = ({
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
   const changeIdCharacter = () => {
-    document.body.style.overflowY = 'auto' 
     dispatch(setDetailId(""));
   };
   const loadingShow = <Loader color='secondary' customStyles={styles.loaderContainer} />;

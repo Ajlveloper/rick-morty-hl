@@ -1,6 +1,7 @@
 import { ACTION_TYPES } from "../Common/types";
 const {
   GET_CHARACTER,
+  SET_CHARACTERS_NEXT_PAGE,
   SET_QUERY,
   LOADER_OFF,
   LOADER_ON,
@@ -14,6 +15,7 @@ const {
 
 const initialState = {
   characters: [],
+  charactersNextPage: false,
   query: "",
   loading: false,
   filterByStatus: "",
@@ -21,13 +23,16 @@ const initialState = {
   isErrorDetail: false,
   characterDetail: {},
   characterId: null,
-  wishList: []
+  wishList: JSON.parse(localStorage.getItem('wisthList')) || []
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_CHARACTER: {
       return { ...state, characters: action.payload };
+    }
+    case SET_CHARACTERS_NEXT_PAGE: {
+      return { ...state, charactersNextPage: action.payload };
     }
     case SET_QUERY: {
       return { ...state, query: action.payload };
@@ -52,8 +57,9 @@ const reducer = (state = initialState, action) => {
     }
     case ADD_TO_WISH_LIST: {
       const character = state.characters.find(character => character.id === +action.payload);
+      localStorage.setItem('wisthList', JSON.stringify([ character, ...state.wishList ]));
       return { 
-        ...state, wishList: [ character, ...state.wishList ]
+        ...state, wishList: JSON.parse(localStorage.getItem('wisthList')),
       };
     }
     case SET_ERROR_DETAIL: {
