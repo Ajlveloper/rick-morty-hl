@@ -3,7 +3,7 @@ import { Card, NotFound } from "../../Components";
 import styles from "./styles.module.css";
 import { getCharacterDetailData, getCharacters } from "../../Api";
 import { useDispatch, useSelector } from "react-redux";
-import { addToWishList, getCharacter, getCharacterDetail, setCharactersNextpage, setCurrentPage, setDetailId, setErrorDetail, setLoading } from "../../Redux/actions";
+import { addToWishList, getCharacter, getCharacterDetail, setCharactersNextpage, setCurrentPage, setDetailId, setErrorDetail, setLoading, setTotalPages } from "../../Redux/actions";
 import CharacterDetail from "../CharacterDetail/CharacterDetail";
 import { generateId } from "../../Common/utils";
 
@@ -21,9 +21,13 @@ const CardsLayout = () => {
       const { data } = await getCharacters(params, signal);
       const results = [ ...data?.results?.map(result => ({ ...result, idKey: generateId() })) ];
       dispatch(getCharacter(state.pageCurrent > 1 ? [ ...state.characters, ...results] : results));
+      dispatch(setTotalPages(data?.info?.pages));
       dispatch(setCharactersNextpage(Boolean(data?.results)));
     } catch (error) {
-      dispatch(getCharacter(state.pageCurrent > 1 ? state.characters : []));
+      dispatch(setCharactersNextpage(false));
+      if (!state.query) {
+        dispatch(getCharacter(state.pageCurrent > 1 ? state.characters : []));
+      }
     } finally {
       dispatch(setLoading(false));
     }
@@ -32,7 +36,7 @@ const CardsLayout = () => {
   useEffect(() => {
     const controller = new AbortController();
     const { signal } = controller
-    if (isMounted.current) getDataCharacter({ signal });
+    if (isMounted.current && state.pageCurrent <= state.totalPages) getDataCharacter({ signal });
 
     return () => {
       if (!isMounted.current) {

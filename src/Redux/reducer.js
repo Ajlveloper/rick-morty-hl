@@ -2,6 +2,7 @@ import { ACTION_TYPES } from "../Common/types";
 const {
   GET_CHARACTER,
   SET_CHARACTERS_NEXT_PAGE,
+  SET_TOTAL_PAGES,
   SET_QUERY,
   LOADER_OFF,
   LOADER_ON,
@@ -16,6 +17,7 @@ const {
 const initialState = {
   characters: [],
   charactersNextPage: false,
+  totalPages: 1,
   query: "",
   loading: false,
   filterByStatus: "",
@@ -33,6 +35,9 @@ const reducer = (state = initialState, action) => {
     }
     case SET_CHARACTERS_NEXT_PAGE: {
       return { ...state, charactersNextPage: action.payload };
+    }
+    case SET_TOTAL_PAGES: {
+      return { ...state, totalPages: action.payload };
     }
     case SET_QUERY: {
       return { ...state, query: action.payload };

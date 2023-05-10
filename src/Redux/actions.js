@@ -3,6 +3,7 @@ import { ACTION_TYPES } from "../Common/types"
 const {
     GET_CHARACTER,
     SET_CHARACTERS_NEXT_PAGE,
+    SET_TOTAL_PAGES,
     SET_QUERY,
     LOADER_OFF,
     LOADER_ON,
@@ -24,6 +25,12 @@ const getCharacter = (payload) => {
 const setCharactersNextpage = (payload) => {
     return {
         type: SET_CHARACTERS_NEXT_PAGE,
+        payload
+    }
+}
+const setTotalPages = (payload) => {
+    return {
+        type: SET_TOTAL_PAGES,
         payload
     }
 }
@@ -93,5 +100,6 @@ export {
     setErrorDetail,
     setDetailId,
     addToWishList,
-    setCharactersNextpage
+    setCharactersNextpage,
+    setTotalPages
 }
