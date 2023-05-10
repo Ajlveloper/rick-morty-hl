@@ -25,9 +25,7 @@ const CardsLayout = () => {
       dispatch(setCharactersNextpage(Boolean(data?.results)));
     } catch (error) {
       dispatch(setCharactersNextpage(false));
-      if (!state.query) {
-        dispatch(getCharacter(state.pageCurrent > 1 ? state.characters : []));
-      }
+      dispatch(getCharacter([]));
     } finally {
       dispatch(setLoading(false));
     }
@@ -105,7 +103,7 @@ const CardsLayout = () => {
     </div>
   )
 
-  return state?.characters?.length ? cardList : null
+  return cardList
 };
 
 export default CardsLayout;
